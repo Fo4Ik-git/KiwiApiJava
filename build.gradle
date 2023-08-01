@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+}
+
+group 'com.fo4ik'
+version '1.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation 'com.google.code.gson:gson:2.10.1'
+}
+
+
+jar {
+    enabled = false
+}
+
+shadowJar{
+    archiveBaseName.set('KiwiApi')
+    archiveClassifier.set('')
+    archiveVersion.set('1.0')
+    mergeServiceFiles()
+    manifest {
+        attributes(
+                'Bundle-Name': 'KiwiApi',
+                'Bundle-SymbolicName': 'KiwiApi',
+                'Bundle-Version': '1.0'
+        )
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
